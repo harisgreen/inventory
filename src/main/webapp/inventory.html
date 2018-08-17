@@ -1,0 +1,136 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vita House - Inventory Management System</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Vita House</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="index.html">Products</a></li>
+            <li class="active"><a href="inventory.html">Inventories</a></li>
+        </ul>
+    </div>
+</nav>
+<div ng-app="mainApp" ng-controller="inventoryController" class="container-fluid">
+    <main>
+        <section class="section pb-0 section-components">
+            <!-- Inputs -->
+            <h3 class="h4 text-success font-weight-bold mb-4">Inventory</h3>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6">
+                        <label for="sel1">Product</label>
+                        <select id="sel1" class="form-control" ng-model="selectedProduct"
+                                ng-options="x.productName for x in productList"/>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <label>Inventory Available</label>
+                        <input type="text" placeholder="Inventory Available"
+                               class="form-control" style="display: none"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6">
+                        <label>Previous Inventory Available</label>
+                        <input type="text" placeholder="Inventory Available" ng-model="selectedProduct.inventoryAmt"
+                               class="form-control" disabled="true"/>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <label>New Inventory Balance</label>
+                        <label class="form-control" style="background-color: #e9ecef">{{selectedProduct.inventoryAmt
+                            +
+                            inventory.receivedStock - inventory.issuedStock}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6">
+                        <label>Received Stock</label>
+                        <input type="number" placeholder="Received Stock" ng-model="inventory.receivedStock"
+                               class="form-control"/>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <label>Issued Stock</label>
+                        <input type="number" placeholder="Issued Stock" ng-model="inventory.issuedStock"
+                               class="form-control" ng-keydown="calculateNewBalance($event)"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6">
+                        <label>Comments</label>
+                        <textarea ng-model="inventory.comments"
+                                  class="form-control"> </textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6">
+                        <button ng-click="submit()" class="btn btn-primary" type="button">Add</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <h3 class="h4 text-success font-weight-bold mb-4">Inventory List</h3>
+                <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Inventory Date</th>
+                            <th>Inventory Available</th>
+                            <th>Received Stock</th>
+                            <th>Issued Stock</th>
+                            <th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    <td colspan=6>
+                        <div class="pagination pull-right text-center">
+
+                            <ul>
+                                <li ng-class="{disabled: currentPage == 0}">
+                                    <a href ng-click="prevPage()">« Prev</a>
+                                </li>
+                                <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap)"
+                                    ng-class="{active: n == currentPage}"
+                                    ng-click="setPage()">
+                                    <a href ng-bind="n + 1">1</a>
+                                </li>
+                                <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+                                    <a href ng-click="nextPage()">Next »</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="x in pagedItems[currentPage]">
+                            <td>{{ x.product.productName }}</td>
+                            <td>{{ x.lastTouched | date:'dd-MMM-yyyy hh:mm a' }}</td>
+                            <td>{{ x.inventoryAvailable }}</td>
+                            <td>{{ x.receivedStock }}</td>
+                            <td>{{ x.issuedStock }}</td>
+                            <td>{{ x.comments }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="./controller/inventory.controller.js"></script>
+</body>
+</html>
