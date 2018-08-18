@@ -16,6 +16,9 @@ public class Inventory {
     @OneToOne(fetch = FetchType.EAGER)
     private Product product;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    private Warehouse warehouse;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastTouched;
 
@@ -87,5 +90,13 @@ public class Inventory {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
     }
 }

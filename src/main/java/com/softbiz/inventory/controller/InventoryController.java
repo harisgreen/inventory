@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public class InventoryController {
     }
 
     @RequestMapping("/list")
-    public List<Inventory> listInventories() {
-        return inventoryService.listInventory();
+    public List<Inventory> listInventories(@PathParam("warehouseId") Long warehouseId) {
+        return inventoryService.listInventory(warehouseId);
     }
 }

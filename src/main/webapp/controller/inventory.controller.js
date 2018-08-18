@@ -1,6 +1,6 @@
-var mainApp = angular.module("mainApp", []);
+app = angular.module("mainApp", []);
 
-mainApp.controller('inventoryController', function ($scope,$http,$filter) {
+app.controller('inventoryController', function ($scope,$http,$filter) {
 
     $scope.gap = 5;
     $scope.filteredItems = [];
@@ -9,18 +9,24 @@ mainApp.controller('inventoryController', function ($scope,$http,$filter) {
     $scope.pagedItems = [];
     $scope.currentPage = 0;
     $scope.query = "";
-    sessionStorage.setItem("uid", 10);
-    console.log(sessionStorage.getItem("uid"));
 
+    $scope.fetchWarehouse = function() {
+        $http.get("/warehouse/list").success(function (response) {
+            $scope.warehouseList = response;
+            $scope.selectedWarehouse = $scope.warehouseList[0];
+            $scope.fetch();
+        });
+    };
     $scope.fetchProducts = function() {
         $http.get("/product/list/inventory").success(function (response) {
             $scope.productList = response;
         });
     };
     $scope.fetch = function() {
-        $http.get("/inventory/list").success(function (response) {
+        $http.get("/inventory/list?warehouseId="+$scope.selectedWarehouse.id).success(function (response) {
             $scope.inventoryList = response;
             $scope.search();
+            sessionStorage.setItem("warehouse", $scope.selectedWarehouse);
         });
     };
     $scope.reset = function() {
@@ -33,14 +39,17 @@ mainApp.controller('inventoryController', function ($scope,$http,$filter) {
             receivedStock: 0,
             issuedStock: 0,
             inventoryBalance: 0,
-            comments: null
+            comments: null,
+            warehouse: null
         };
+        if(sessionStorage.getItem("warehouse")) $scope.selectedWarehouse = sessionStorage.getItem("warehouse");
     };
 
     $scope.submit = function(){
         console.log($scope.selectedProduct);
         console.log($scope.inventory);
         $scope.inventory.product = $scope.selectedProduct;
+        $scope.inventory.warehouse = $scope.selectedWarehouse;
         $http.post("/inventory/save", $scope.inventory).success( function(response) {
             $scope.inventory = response;
             $scope.fetch();
@@ -127,7 +136,7 @@ mainApp.controller('inventoryController', function ($scope,$http,$filter) {
     };
 
     $scope.fetchProducts();
-    $scope.fetch();
+    $scope.fetchWarehouse();
     $scope.reset();
 
 });

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/list/inventory")
-    public List<Product> listProductsWithInventory() {
-        return productService.findAllWithInventory();
+    public List<Product> listProductsWithInventory(@PathParam("warehouseId") Long warehouseId) {
+        return productService.findAllWithInventory(warehouseId);
     }
 }

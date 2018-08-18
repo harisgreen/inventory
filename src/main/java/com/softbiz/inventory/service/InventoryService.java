@@ -22,5 +22,5 @@ public class InventoryService {
         return inventoryRepo.save(inventory);
     }
 
-    public List<Inventory> listInventory() {return Lists.newArrayList(inventoryRepo.findAllWithAvailableInventory());}
+    public List<Inventory> listInventory(Long warehouseId) {return Lists.newArrayList(inventoryRepo.findAllWithAvailableInventory(warehouseId));}
 }

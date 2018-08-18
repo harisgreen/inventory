@@ -17,16 +17,17 @@
             <a class="navbar-brand" href="#">Vita House</a>
         </div>
         <ul class="nav navbar-nav">
+            <li><a href="warehouse.html">Warehouse</a></li>
             <li><a href="index.html">Products</a></li>
             <li class="active"><a href="inventory.html">Inventories</a></li>
-            <li><a href="warehouse.html">Warehouse</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <select class="form-control" ng-model="selectedProduct"
-                        ng-options="x.productName for x in productList"></select>
-            </li>
-        </ul>
+        <div class="navbar-form navbar-left">
+            <div class="form-group">
+                <label style="padding: 5px;" for="sel4">Warehouse: </label></li>
+                <select class="form-control" id="sel4" ng-change="fetch()" ng-model="selectedWarehouse"
+                        ng-options="x.name for x in warehouseList"></select>
+            </div>
+        </div>
     </div>
 </nav>
 <div class="container-fluid">
@@ -46,6 +47,15 @@
                         <label>Inventory Available</label>
                         <input type="text" placeholder="Inventory Available"
                                class="form-control" style="display: none"/>
+                    </div>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6">
+                            <label for="sel3">Warehouse</label>
+                            <select class="form-control" id="sel3" ng-model="selectedWarehouse"
+                                    ng-change="fetch()" ng-options="x.name for x in warehouseList"></select>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -90,17 +100,18 @@
                 <h3 class="h4 text-success font-weight-bold mb-4">Inventory List</h3>
                 <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
                     <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Inventory Date</th>
-                            <th>Inventory Available</th>
-                            <th>Received Stock</th>
-                            <th>Issued Stock</th>
-                            <th>Comments</th>
-                        </tr>
+                    <tr>
+                        <th>Warehouse</th>
+                        <th>Product</th>
+                        <th>Inventory Date</th>
+                        <th>Inventory Available</th>
+                        <th>Received Stock</th>
+                        <th>Issued Stock</th>
+                        <th>Comments</th>
+                    </tr>
                     </thead>
                     <tfoot>
-                    <td colspan=6>
+                    <td colspan=7>
                         <div class="pagination pull-right text-center">
 
                             <ul>
@@ -120,14 +131,15 @@
                     </td>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="x in pagedItems[currentPage]">
-                            <td>{{ x.product.productName }}</td>
-                            <td>{{ x.lastTouched | date:'dd-MMM-yy hh:mm a' }}</td>
-                            <td>{{ x.inventoryAvailable }}</td>
-                            <td>{{ x.receivedStock }}</td>
-                            <td>{{ x.issuedStock }}</td>
-                            <td>{{ x.comments }}</td>
-                        </tr>
+                    <tr ng-repeat="x in pagedItems[currentPage]">
+                        <td>{{ x.warehouse.name }}</td>
+                        <td>{{ x.product.productName }}</td>
+                        <td>{{ x.lastTouched | date:'dd-MMM-yy hh:mm a' }}</td>
+                        <td>{{ x.inventoryAvailable }}</td>
+                        <td>{{ x.receivedStock }}</td>
+                        <td>{{ x.issuedStock }}</td>
+                        <td>{{ x.comments }}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

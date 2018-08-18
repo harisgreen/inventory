@@ -34,5 +34,5 @@ public class ProductService {
 
     public List<Product> findAll() { return Lists.newArrayList(productRepo.findAll(new Sort(Sort.Direction.DESC, "id"))); }
 
-    public List<Product> findAllWithInventory() {return productRepo.findAllWithInventory(); }
+    public List<Product> findAllWithInventory(Long warehouseId) {return productRepo.findAllWithInventory(warehouseId); }
 }
