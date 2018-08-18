@@ -10,15 +10,8 @@ app.controller('inventoryController', function ($scope,$http,$filter) {
     $scope.currentPage = 0;
     $scope.query = "";
 
-    $scope.fetchWarehouse = function() {
-        $http.get("/warehouse/list").success(function (response) {
-            $scope.warehouseList = response;
-            $scope.selectedWarehouse = $scope.warehouseList[0];
-            $scope.fetch();
-        });
-    };
     $scope.fetchProducts = function() {
-        $http.get("/product/list/inventory").success(function (response) {
+        $http.get("/product/list/inventory?warehouseId="+$scope.selectedWarehouse.id).success(function (response) {
             $scope.productList = response;
         });
     };
@@ -26,7 +19,14 @@ app.controller('inventoryController', function ($scope,$http,$filter) {
         $http.get("/inventory/list?warehouseId="+$scope.selectedWarehouse.id).success(function (response) {
             $scope.inventoryList = response;
             $scope.search();
-            sessionStorage.setItem("warehouse", $scope.selectedWarehouse);
+        });
+    };
+    $scope.fetchWarehouse = function() {
+        $http.get("/warehouse/list").success(function (response) {
+            $scope.warehouseList = response;
+            $scope.selectedWarehouse = $scope.warehouseList[0];
+            $scope.fetch();
+            $scope.fetchProducts();
         });
     };
     $scope.reset = function() {
@@ -42,7 +42,6 @@ app.controller('inventoryController', function ($scope,$http,$filter) {
             comments: null,
             warehouse: null
         };
-        if(sessionStorage.getItem("warehouse")) $scope.selectedWarehouse = sessionStorage.getItem("warehouse");
     };
 
     $scope.submit = function(){
@@ -135,8 +134,7 @@ app.controller('inventoryController', function ($scope,$http,$filter) {
         $scope.currentPage = this.n;
     };
 
-    $scope.fetchProducts();
-    $scope.fetchWarehouse();
     $scope.reset();
+    $scope.fetchWarehouse();
 
 });

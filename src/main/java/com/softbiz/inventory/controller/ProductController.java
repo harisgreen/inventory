@@ -22,8 +22,8 @@ public class ProductController {
     private ProductService productService;
 
     @RequestMapping(method= RequestMethod.POST, value = "/save")
-    public Product saveProduct(@RequestBody Product product) {
-        return productService.createProduct(product);
+    public Product saveProduct(@RequestBody Product product, @PathParam("warehouseId") Long warehouseId) {
+        return productService.createProduct(product, warehouseId);
     }
 
     @RequestMapping(value = "/list")

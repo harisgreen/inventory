@@ -12,7 +12,7 @@ app.controller('productController', function ($scope,$http) {
             $scope.selectedWarehouse = $scope.warehouseList[0];
             $scope.fetch();
 
-            sessionStorage.setItem("warehouse", $scope.selectedWarehouse);
+            //sessionStorage.setItem("warehouse", $scope.selectedWarehouse);
             //console.log(sessionStorage.getItem("uid"));
         });
     };
@@ -21,11 +21,11 @@ app.controller('productController', function ($scope,$http) {
             productName: "",
             inventoryAmt: 0
         };
-        if(sessionStorage.getItem("warehouse")) $scope.selectedWarehouse = sessionStorage.getItem("warehouse");
     };
 
     $scope.submit = function(){
-        $http.post("/product/save", $scope.product).success( function(response) {
+        var warehouseId = $scope.selectedWarehouse.id;
+        $http.post("/product/save?warehouseId="+warehouseId, $scope.product).success( function(response) {
             $scope.product = response;
             $scope.fetch();
             $scope.reset();

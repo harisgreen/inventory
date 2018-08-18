@@ -3,6 +3,7 @@ package com.softbiz.inventory.service;
 import com.google.common.collect.Lists;
 import com.softbiz.inventory.model.Inventory;
 import com.softbiz.inventory.model.Product;
+import com.softbiz.inventory.model.Warehouse;
 import com.softbiz.inventory.repository.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -22,12 +23,15 @@ public class ProductService {
     @Autowired
     private InventoryService inventoryService;
 
-    public Product createProduct(Product product) {
+    public Product createProduct(Product product, Long warehouseId) {
         Product product1 = productRepo.save(product);
         Inventory inventory = new Inventory();
         inventory.setReceivedStock(product.getInventoryAmt());
         inventory.setIssuedStock(0L);
         inventory.setProduct(product1);
+        Warehouse wh = new Warehouse();
+        wh.setId(warehouseId);
+        inventory.setWarehouse(wh);
         inventoryService.createInventory(inventory);
         return product1;
     }
