@@ -20,13 +20,13 @@ app.controller('inventoryController', function ($scope,$http,$filter) {
             $scope.inventoryList = response;
             $scope.search();
         });
+        $scope.fetchProducts();
     };
     $scope.fetchWarehouse = function() {
         $http.get("/warehouse/list").success(function (response) {
             $scope.warehouseList = response;
             $scope.selectedWarehouse = $scope.warehouseList[0];
             $scope.fetch();
-            $scope.fetchProducts();
         });
     };
     $scope.reset = function() {
