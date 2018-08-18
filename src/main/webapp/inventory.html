@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="assets/css/custom.css">
 </head>
 
-<body>
+<body ng-app="mainApp" ng-controller="inventoryController">
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -21,9 +21,15 @@
             <li class="active"><a href="inventory.html">Inventories</a></li>
             <li><a href="warehouse.html">Warehouse</a></li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <select class="form-control" ng-model="selectedProduct"
+                        ng-options="x.productName for x in productList"></select>
+            </li>
+        </ul>
     </div>
 </nav>
-<div ng-app="mainApp" ng-controller="inventoryController" class="container-fluid">
+<div class="container-fluid">
     <main>
         <section class="section pb-0 section-components">
             <!-- Inputs -->
@@ -31,24 +37,24 @@
 
             <div class="form-group">
                 <div class="row">
-                    <div class="col-lg-6 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <label for="sel1">Product</label>
                         <select id="sel1" class="form-control" ng-model="selectedProduct"
                                 ng-options="x.productName for x in productList"/>
                     </div>
-                    <div class="col-lg-6 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <label>Inventory Available</label>
                         <input type="text" placeholder="Inventory Available"
                                class="form-control" style="display: none"/>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <label>Previous Inventory Available</label>
                         <input type="text" placeholder="Inventory Available" ng-model="selectedProduct.inventoryAmt"
                                class="form-control" disabled="true"/>
                     </div>
-                    <div class="col-lg-6 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <label>New Inventory Balance</label>
                         <label class="form-control" style="background-color: #e9ecef">{{selectedProduct.inventoryAmt
                             +
@@ -56,19 +62,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <label>Received Stock</label>
                         <input type="number" placeholder="Received Stock" ng-model="inventory.receivedStock"
                                class="form-control"/>
                     </div>
-                    <div class="col-lg-6 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <label>Issued Stock</label>
                         <input type="number" placeholder="Issued Stock" ng-model="inventory.issuedStock"
                                class="form-control" ng-keydown="calculateNewBalance($event)"/>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <label>Comments</label>
                         <textarea ng-model="inventory.comments"
                                   class="form-control"> </textarea>
@@ -101,7 +105,7 @@
 
                             <ul>
                                 <li ng-class="{disabled: currentPage == 0}">
-                                    <a href ng-click="prevPage()">� Prev</a>
+                                    <a href ng-click="prevPage()">Prev</a>
                                 </li>
                                 <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap)"
                                     ng-class="{active: n == currentPage}"
@@ -109,7 +113,7 @@
                                     <a href ng-bind="n + 1">1</a>
                                 </li>
                                 <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
-                                    <a href ng-click="nextPage()">Next �</a>
+                                    <a href ng-click="nextPage()">Next</a>
                                 </li>
                             </ul>
                         </div>
@@ -118,7 +122,7 @@
                     <tbody>
                         <tr ng-repeat="x in pagedItems[currentPage]">
                             <td>{{ x.product.productName }}</td>
-                            <td>{{ x.lastTouched | date:'dd-MMM-yyyy hh:mm a' }}</td>
+                            <td>{{ x.lastTouched | date:'dd-MMM-yy hh:mm a' }}</td>
                             <td>{{ x.inventoryAvailable }}</td>
                             <td>{{ x.receivedStock }}</td>
                             <td>{{ x.issuedStock }}</td>
