@@ -1,6 +1,6 @@
-var mainApp = angular.module("mainApp", []);
+var app = angular.module("mainApp", []);
 
-mainApp.controller('productController', function ($scope,$http) {
+app.controller('productController', function ($scope,$http) {
     $scope.fetch = function() {
         $http.get("/product/list/inventory").success(function (response) {
             $scope.productList = response;
@@ -13,9 +13,6 @@ mainApp.controller('productController', function ($scope,$http) {
         };
     };
 
-    $scope.fetch();
-    $scope.reset();
-
     $scope.submit = function(){
         $http.post("/product/save", $scope.product).success( function(response) {
             $scope.product = response;
@@ -26,6 +23,10 @@ mainApp.controller('productController', function ($scope,$http) {
 
     $scope.submitEnter = function($event){
         if($event.keyCode==13) $scope.submit();
-    }
+    };
+
+    console.log(sessionStorage.getItem("uid"));
+    $scope.fetch();
+    $scope.reset();
 
 });

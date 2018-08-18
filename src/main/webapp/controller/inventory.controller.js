@@ -9,6 +9,8 @@ mainApp.controller('inventoryController', function ($scope,$http,$filter) {
     $scope.pagedItems = [];
     $scope.currentPage = 0;
     $scope.query = "";
+    sessionStorage.setItem("uid", 10);
+    console.log(sessionStorage.getItem("uid"));
 
     $scope.fetchProducts = function() {
         $http.get("/product/list/inventory").success(function (response) {
