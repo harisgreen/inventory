@@ -1,0 +1,261 @@
+{
+  "front-version": "2.19.0",
+  "version": 3,
+  "nodes": [
+    {
+      "type": "Project",
+      "id": "b8fde190-b841-4726-8e0f-077fcdef3343",
+      "lastModified": "2018-08-19T23:39:22.838+05:00",
+      "name": "InventoryVH"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "textBody": "{\n  \"product\" : {\n    \"id\":26\n  },\n  \"inventoryAvailable\" : 85,\n  \"receivedStock\" : 78,\n  \"issuedStock\" : 45\n}"
+      },
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:81",
+        "path": "/inventory/save"
+      },
+      "id": "6a91096d-0395-4b8c-a269-43c931e80210",
+      "lastModified": "2018-08-15T13:12:32.457+05:00",
+      "name": "Inventory",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "auth0|5b56a566554e9c2a648f6514"
+      },
+      "parentId": "b8fde190-b841-4726-8e0f-077fcdef3343"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"productName\":\"Artigel Tablet\",\n  \"inventoryAmt\": 89\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:81",
+        "path": "/product/save"
+      },
+      "id": "c4e8a134-595f-4efa-88dc-e1bb504f6756",
+      "lastModified": "2018-08-14T20:45:03.968+05:00",
+      "name": "Product",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "auth0|5b56a566554e9c2a648f6514"
+      },
+      "parentId": "b8fde190-b841-4726-8e0f-077fcdef3343"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"productName\":\"Artigel Tablet\",\n  \"inventoryAmt\": 89\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:81",
+        "path": "/product/list/inventory"
+      },
+      "id": "d36ec661-2fa6-492f-ae0b-e9804a40902e",
+      "lastModified": "2018-08-15T17:21:51.795+05:00",
+      "name": "ProductWithInventory",
+      "headers": [],
+      "metaInfo": {
+        "ownerId": "auth0|5b56a566554e9c2a648f6514"
+      },
+      "parentId": "b8fde190-b841-4726-8e0f-077fcdef3343"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "textBody": "{\n\t\"orderNum\" : \"SO-3\",\n    \"orderProductList\" : \n    [\n    \t{\n        \t\"product\" : \n            {\n            \t\"id\" : \"53\"\n            },\n          \t\"quantity\" : 5\n        },\n      \n    \t{\n        \t\"product\" : \n            {\n            \t\"id\" : \"56\"\n            },\n          \t\"quantity\" : 2\n        }\n    ]\n    \n}"
+      },
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:81",
+        "path": "/sale/order/save"
+      },
+      "id": "80078369-e808-41e3-983b-62b391d58860",
+      "lastModified": "2018-08-19T23:38:49.564+05:00",
+      "name": "SaleOrder",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "auth0|5b56a566554e9c2a648f6514"
+      },
+      "parentId": "b8fde190-b841-4726-8e0f-077fcdef3343"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:81",
+        "path": "/sale/order/list"
+      },
+      "id": "b43e1df7-dd3f-4176-8654-6b5a3bf45536",
+      "lastModified": "2018-08-19T23:39:22.839+05:00",
+      "name": "SaleOrderList",
+      "headers": [],
+      "metaInfo": {
+        "ownerId": "auth0|5b56a566554e9c2a648f6514"
+      },
+      "parentId": "b8fde190-b841-4726-8e0f-077fcdef3343"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "textBody": "{\n\t\"name\" : \"Warehouse\"\n}"
+      },
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:81",
+        "path": "/warehouse/save"
+      },
+      "id": "935bb8dc-6138-4480-85da-39d3d3649914",
+      "lastModified": "2018-08-18T12:22:49.755+05:00",
+      "name": "Warehouse",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "auth0|5b56a566554e9c2a648f6514"
+      },
+      "parentId": "b8fde190-b841-4726-8e0f-077fcdef3343"
+    }
+  ]
+}
