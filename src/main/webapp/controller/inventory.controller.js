@@ -2,10 +2,10 @@ app = angular.module("mainApp", []);
 
 app.controller('inventoryController', function ($scope,$http,$filter) {
 
-    $scope.gap = 5;
+    $scope.gap = 15;
     $scope.filteredItems = [];
     $scope.groupedItems = [];
-    $scope.itemsPerPage = 5;
+    $scope.itemsPerPage = 15;
     $scope.pagedItems = [];
     $scope.currentPage = 0;
     $scope.query = "";
