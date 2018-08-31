@@ -17,10 +17,7 @@ app.controller('productController', function ($scope,$http) {
         });
     };
     $scope.reset = function() {
-        $scope.product = {
-            productName: "",
-            inventoryAmt: 0
-        };
+        $scope.product = {};
     };
 
     $scope.submit = function(){

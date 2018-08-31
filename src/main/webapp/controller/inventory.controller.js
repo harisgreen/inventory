@@ -33,15 +33,7 @@ app.controller('inventoryController', function ($scope,$http,$filter) {
         $scope.selectedProduct = {
             inventoryAmt: 0
         };
-        $scope.inventory = {
-            product: null,
-            inventoryAvailable: null,
-            receivedStock: 0,
-            issuedStock: 0,
-            inventoryBalance: 0,
-            comments: null,
-            warehouse: null
-        };
+        $scope.inventory = {};
     };
 
     $scope.submit = function(){
@@ -49,6 +41,9 @@ app.controller('inventoryController', function ($scope,$http,$filter) {
         console.log($scope.inventory);
         $scope.inventory.product = $scope.selectedProduct;
         $scope.inventory.warehouse = $scope.selectedWarehouse;
+        if($scope.inventory.receivedStock == null) $scope.inventory.receivedStock = 0;
+        if($scope.inventory.issuedStock == null) $scope.inventory.issuedStock = 0;
+
         $http.post("/inventory/save", $scope.inventory).success( function(response) {
             $scope.inventory = response;
             $scope.fetch();

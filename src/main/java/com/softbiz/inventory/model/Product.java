@@ -13,6 +13,7 @@ public class Product {
     private Long id;
     private String productName;
     private Long inventoryAmt;
+    private Long price;
 
     public Product() {}
 
@@ -45,4 +46,11 @@ public class Product {
         this.productName = productName;
     }
 
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
+    }
 }
