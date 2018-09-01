@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.softbiz.inventory.model.SaleOrder;
 import com.softbiz.inventory.repository.SaleOrderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,6 @@ public class SaleOrderService {
     }
 
     public List<SaleOrder> listSaleOrders() {
-        return Lists.newArrayList(saleOrderRepo.findAll());
+        return Lists.newArrayList(saleOrderRepo.findAll(new Sort(Sort.Direction.DESC, "id")));
     }
 }

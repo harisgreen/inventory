@@ -22,5 +22,13 @@ public class InventoryService {
         return inventoryRepo.save(inventory);
     }
 
+    public List<Inventory> removeInventory(List<Long> inventoryIds) {
+        for(Long id : inventoryIds) {
+            Inventory deleteInventory = inventoryRepo.findById(id).get();
+            inventoryRepo.delete(deleteInventory);
+        }
+        return Lists.newArrayList(inventoryRepo.findAll(new Sort(Sort.Direction.DESC, "id")));
+    }
+
     public List<Inventory> listInventory(Long warehouseId) {return Lists.newArrayList(inventoryRepo.findAllWithAvailableInventory(warehouseId));}
 }

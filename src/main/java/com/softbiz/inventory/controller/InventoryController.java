@@ -3,10 +3,7 @@ package com.softbiz.inventory.controller;
 import com.softbiz.inventory.model.Inventory;
 import com.softbiz.inventory.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.List;
@@ -24,6 +21,11 @@ public class InventoryController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Inventory addInventory(@RequestBody Inventory inventory) {
         return inventoryService.createInventory(inventory);
+    }
+
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public List<Inventory> removeInventory(@RequestBody List<Long> ids) {
+        return inventoryService.removeInventory(ids);
     }
 
     @RequestMapping("/list")

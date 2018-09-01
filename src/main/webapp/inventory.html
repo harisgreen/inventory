@@ -89,9 +89,11 @@
 
             <div>
                 <h3 class="h4 text-success font-weight-bold mb-4">Inventory List</h3>
+                <button class="btn btn-primary" ng-click="remove()">remove</button>
                 <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
                     <thead>
                     <tr>
+                        <th>S. No.</th>
                         <th>Warehouse</th>
                         <th>Product</th>
                         <th>Inventory Date</th>
@@ -102,7 +104,7 @@
                     </tr>
                     </thead>
                     <tfoot>
-                    <td colspan=7>
+                    <td colspan=8>
                         <div class="pagination pull-right text-center">
 
                             <ul>
@@ -123,6 +125,7 @@
                     </tfoot>
                     <tbody>
                     <tr ng-repeat="x in pagedItems[currentPage]">
+                        <td><input type="checkbox" ng-model="x.isDelete"/>{{$index}}</td>
                         <td>{{ x.warehouse.name }}</td>
                         <td>{{ x.product.productName }}</td>
                         <td>{{ x.lastTouched | date:'dd-MMM-yy hh:mm a' }}</td>

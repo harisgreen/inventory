@@ -24,15 +24,19 @@ public class ProductService {
     private InventoryService inventoryService;
 
     public Product createProduct(Product product, Long warehouseId) {
+        boolean newProdut = false;
+        if(product.getId() == null) newProdut = true;
         Product product1 = productRepo.save(product);
-        Inventory inventory = new Inventory();
-        inventory.setReceivedStock(product.getInventoryAmt());
-        inventory.setIssuedStock(0L);
-        inventory.setProduct(product1);
-        Warehouse wh = new Warehouse();
-        wh.setId(warehouseId);
-        inventory.setWarehouse(wh);
-        inventoryService.createInventory(inventory);
+        if(newProdut) {
+            Inventory inventory = new Inventory();
+            inventory.setReceivedStock(product.getInventoryAmt());
+            inventory.setIssuedStock(0L);
+            inventory.setProduct(product1);
+            Warehouse wh = new Warehouse();
+            wh.setId(warehouseId);
+            inventory.setWarehouse(wh);
+            inventoryService.createInventory(inventory);
+        }
         return product1;
     }
 

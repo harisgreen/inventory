@@ -60,7 +60,9 @@
 
                     <div class="row">
                         <div class="col-lg-4 col-sm-6">
-                            <button ng-click="submit()" class="btn btn-primary" type="button">Add</button>
+                            <button ng-click="submit()" ng-show="addBtnShow" class="btn btn-primary" type="button">Add</button>
+                            <button ng-click="editSubmit()" ng-show="editBtnShow" class="btn btn-primary" type="button">Update</button>
+                            <button ng-click="reset()" ng-show="editBtnShow" class="btn btn-primary" type="button">Clear</button>
                         </div>
                     </div>
                 </div>
@@ -71,11 +73,13 @@
                             <th>Product Name</th>
                             <th>Product Inventory</th>
                             <th>Price</th>
+                            <th>Edit</th>
                         </tr>
                         <tr ng-repeat="x in productList">
                             <td>{{ x.productName }}</td>
                             <td>{{ x.inventoryAmt }}</td>
                             <td>{{ x.price }}</td>
+                            <td><button class="btn btn-primary" ng-click="edit(x)">Edit</button></td>
                         </tr>
                     </table>
                 </div>

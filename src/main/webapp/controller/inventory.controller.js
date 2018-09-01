@@ -52,6 +52,22 @@ app.controller('inventoryController', function ($scope,$http,$filter) {
         });
     };
 
+    $scope.remove = function() {
+        var ids = [];
+        angular.forEach($scope.pagedItems[$scope.currentPage], function (v) {
+            if (v.isDelete) {
+                ids.push(v.id);
+                anyDelete = true;
+            }
+        });
+        if(ids.length > 0) {
+            $http.post("/inventory/remove", ids).success(function (response) {
+                $scope.inventoryList = response;
+                $scope.search();
+            });
+        }
+    };
+
     $scope.calculateNewBalance = function($event){
         var inv = $scope.inventory;
         var newBalance = $scope.selectedProduct.inventoryAmt - (inv.issuedStock == null ? 0 : inv.issuedStock)
