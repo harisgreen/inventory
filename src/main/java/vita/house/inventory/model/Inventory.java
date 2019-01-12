@@ -1,4 +1,4 @@
-package com.softbiz.inventory.model;
+package vita.house.inventory.model;
 
 import javax.persistence.*;
 import java.util.Date;

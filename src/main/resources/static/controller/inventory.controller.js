@@ -52,16 +52,25 @@ app.controller('inventoryController', function ($scope,$http,$filter) {
         });
     };
 
+    $scope.isAnySelected = function() {
+        var anyDelete=false;
+        angular.forEach($scope.pagedItems[$scope.currentPage], function (v) {
+            if (v.isDelete) {
+                anyDelete = true;
+            }
+        });
+        return !anyDelete;
+    };
+
     $scope.remove = function() {
         var ids = [];
         angular.forEach($scope.pagedItems[$scope.currentPage], function (v) {
             if (v.isDelete) {
                 ids.push(v.id);
-                anyDelete = true;
             }
         });
         if(ids.length > 0) {
-            $http.post("/inventory/remove", ids).success(function (response) {
+            $http.post("/inventory/remove?warehouseId="+$scope.selectedWarehouse.id, ids).success(function (response) {
                 $scope.inventoryList = response;
                 $scope.search();
             });
@@ -117,7 +126,7 @@ app.controller('inventoryController', function ($scope,$http,$filter) {
 
     $scope.range = function (size,start, end) {
         var ret = [];
-        console.log(size,start, end);
+        // console.log(size,start, end);
 
         if (size < end) {
             end = size;
@@ -131,7 +140,7 @@ app.controller('inventoryController', function ($scope,$http,$filter) {
         for (var i = start; i < end; i++) {
             ret.push(i);
         }
-        console.log(ret);
+        // console.log(ret);
         return ret;
     };
 

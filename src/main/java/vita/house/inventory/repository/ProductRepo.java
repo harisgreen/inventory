@@ -1,7 +1,6 @@
-package com.softbiz.inventory.repository;
+package vita.house.inventory.repository;
 
-import com.softbiz.inventory.model.Product;
-import org.springframework.data.domain.Sort;
+import vita.house.inventory.model.Product;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 

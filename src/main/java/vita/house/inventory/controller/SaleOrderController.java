@@ -1,7 +1,7 @@
-package com.softbiz.inventory.controller;
+package vita.house.inventory.controller;
 
-import com.softbiz.inventory.model.SaleOrder;
-import com.softbiz.inventory.service.SaleOrderService;
+import vita.house.inventory.model.SaleOrder;
+import vita.house.inventory.service.SaleOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

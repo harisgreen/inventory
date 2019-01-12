@@ -1,4 +1,4 @@
-package com.softbiz.inventory;
+package vita.house.inventory;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

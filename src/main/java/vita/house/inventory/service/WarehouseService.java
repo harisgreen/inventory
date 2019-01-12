@@ -1,8 +1,8 @@
-package com.softbiz.inventory.service;
+package vita.house.inventory.service;
 
 import com.google.common.collect.Lists;
-import com.softbiz.inventory.model.Warehouse;
-import com.softbiz.inventory.repository.WarehouseRepo;
+import vita.house.inventory.model.Warehouse;
+import vita.house.inventory.repository.WarehouseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;

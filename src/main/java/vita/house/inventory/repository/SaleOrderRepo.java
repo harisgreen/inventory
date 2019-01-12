@@ -1,6 +1,6 @@
-package com.softbiz.inventory.repository;
+package vita.house.inventory.repository;
 
-import com.softbiz.inventory.model.SaleOrder;
+import vita.house.inventory.model.SaleOrder;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**

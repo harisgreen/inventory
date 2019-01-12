@@ -1,6 +1,4 @@
-package com.softbiz.inventory.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package vita.house.inventory.model;
 
 import javax.persistence.*;
 

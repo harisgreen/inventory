@@ -1,8 +1,8 @@
-package com.softbiz.inventory.service;
+package vita.house.inventory.service;
 
 import com.google.common.collect.Lists;
-import com.softbiz.inventory.model.Inventory;
-import com.softbiz.inventory.repository.InventoryRepo;
+import vita.house.inventory.model.Inventory;
+import vita.house.inventory.repository.InventoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -22,12 +22,12 @@ public class InventoryService {
         return inventoryRepo.save(inventory);
     }
 
-    public List<Inventory> removeInventory(List<Long> inventoryIds) {
+    public List<Inventory> removeInventory(List<Long> inventoryIds, Long warehouseId) {
         for(Long id : inventoryIds) {
             Inventory deleteInventory = inventoryRepo.findById(id).get();
             inventoryRepo.delete(deleteInventory);
         }
-        return Lists.newArrayList(inventoryRepo.findAll(new Sort(Sort.Direction.DESC, "id")));
+        return Lists.newArrayList(inventoryRepo.findAllWithAvailableInventory(warehouseId));
     }
 
     public List<Inventory> listInventory(Long warehouseId) {return Lists.newArrayList(inventoryRepo.findAllWithAvailableInventory(warehouseId));}

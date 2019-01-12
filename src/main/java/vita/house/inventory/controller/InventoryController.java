@@ -1,7 +1,7 @@
-package com.softbiz.inventory.controller;
+package vita.house.inventory.controller;
 
-import com.softbiz.inventory.model.Inventory;
-import com.softbiz.inventory.service.InventoryService;
+import vita.house.inventory.model.Inventory;
+import vita.house.inventory.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +24,10 @@ public class InventoryController {
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
-    public List<Inventory> removeInventory(@RequestBody List<Long> ids) {
-        return inventoryService.removeInventory(ids);
+    public List<Inventory> removeInventory(@RequestBody List<Long> ids,
+                                           @PathParam("warehouseId") Long warehouseId) {
+        List<Inventory> inventories = inventoryService.removeInventory(ids, warehouseId);
+        return inventories;
     }
 
     @RequestMapping("/list")

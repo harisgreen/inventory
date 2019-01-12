@@ -14,17 +14,13 @@
 <div ng-app="mainApp" ng-controller="productController">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">Vita House</a>
-            </div>
             <ul class="nav navbar-nav">
                 <li><a href="warehouse.html">Warehouse</a></li>
-                <li class="active"><a href="index.html">Products</a></li>
                 <li><a href="inventory.html">Inventories</a></li>
             </ul>
             <div class="navbar-form navbar-left">
                 <div class="form-group">
-                    <label style="padding: 3px;" for="sel4">Warehouse: </label></li>
+                    <label style="padding: 3px;" for="sel4">Vita House Warehouse: </label></li>
                     <select class="form-control" id="sel4" ng-change="fetch()" ng-model="selectedWarehouse"
                             ng-options="x.name for x in warehouseList"></select>
                 </div>
@@ -50,7 +46,7 @@
                                    ng-disabled="editBtnShow" ng-model="product.inventoryAmt"
                                    class="form-control"/>
                         </div>
-                        <div class="col-lg-4 col-sm-4">
+                        <div class="col-lg-4 col-sm-4" ng-hide="true">
                             <label>Price</label>
                             <input type="number" placeholder="Price" ng-keypress="submitEnter($event)"
                                    ng-model="product.price"
@@ -60,8 +56,8 @@
 
                     <div class="row">
                         <div class="col-lg-4 col-sm-6">
-                            <button ng-click="submit()" ng-show="addBtnShow" class="btn btn-primary" type="button">Add</button>
-                            <button ng-click="editSubmit()" ng-show="editBtnShow" class="btn btn-primary" type="button">Update</button>
+                            <button ng-click="submit()" ng-disabled="!product.productName || !product.inventoryAmt" ng-show="addBtnShow" class="btn btn-primary" type="button">Add</button>
+                            <button ng-click="editSubmit()" ng-disabled="!product.productName" ng-show="editBtnShow" class="btn btn-primary" type="button">Update</button>
                             <button ng-click="reset()" ng-show="editBtnShow" class="btn btn-primary" type="button">Clear</button>
                         </div>
                     </div>
@@ -72,13 +68,13 @@
                         <tr>
                             <th>Product Name</th>
                             <th>Product Inventory</th>
-                            <th>Price</th>
+                            <th ng-hide="true">Price</th>
                             <th>Edit</th>
                         </tr>
                         <tr ng-repeat="x in productList">
                             <td>{{ x.productName }}</td>
                             <td>{{ x.inventoryAmt }}</td>
-                            <td>{{ x.price }}</td>
+                            <td ng-hide="true">{{ x.price }}</td>
                             <td><button class="btn btn-primary" ng-click="edit(x)">Edit</button></td>
                         </tr>
                     </table>

@@ -14,17 +14,13 @@
 <body ng-app="mainApp" ng-controller="inventoryController">
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">Vita House</a>
-        </div>
         <ul class="nav navbar-nav">
             <li><a href="warehouse.html">Warehouse</a></li>
             <li><a href="index.html">Products</a></li>
-            <li class="active"><a href="inventory.html">Inventories</a></li>
         </ul>
         <div class="navbar-form navbar-left">
             <div class="form-group">
-                <label style="padding: 3px;" for="sel4">Warehouse: </label></li>
+                <label style="padding: 3px;" for="sel4">Vita House Warehouse: </label></li>
                 <select class="form-control" id="sel4" ng-change="fetch()" ng-model="selectedWarehouse"
                         ng-options="x.name for x in warehouseList"></select>
             </div>
@@ -40,11 +36,6 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-lg-4 col-sm-4">
-                        <label for="sel3">Warehouse</label>
-                        <select class="form-control" id="sel3" ng-model="selectedWarehouse"
-                                ng-change="fetch()" ng-options="x.name for x in warehouseList"></select>
-                    </div>
-                    <div class="col-lg-4 col-sm-4">
                         <label for="sel1">Product</label>
                         <select id="sel1" class="form-control" ng-model="selectedProduct"
                                 ng-options="x.productName for x in productList"></select>
@@ -54,13 +45,13 @@
                         <input type="text" placeholder="Inventory Available" ng-model="selectedProduct.inventoryAmt"
                                class="form-control" disabled="true"/>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-lg-4 col-sm-4">
                         <label>Received Stock</label>
                         <input type="number" placeholder="Received Stock" ng-model="inventory.receivedStock"
                                class="form-control"/>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-lg-4 col-sm-4">
                         <label>Issued Stock</label>
                         <input type="number" placeholder="Issued Stock" ng-model="inventory.issuedStock"
@@ -72,8 +63,6 @@
                             +
                             inventory.receivedStock - inventory.issuedStock}}</label>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-lg-4 col-sm-4">
                         <label>Comments</label>
                         <textarea ng-model="inventory.comments"
@@ -82,14 +71,14 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-sm-4">
-                        <button ng-click="submit()" class="btn btn-primary" type="button">Add</button>
+                        <button ng-click="submit()" ng-disabled="!selectedProduct.id || (!inventory.issuedStock && !inventory.receivedStock)" class="btn btn-primary" type="button">Add</button>
                     </div>
                 </div>
             </div>
 
             <div>
                 <h3 class="h4 text-success font-weight-bold mb-4">Inventory List</h3>
-                <button class="btn btn-primary" ng-click="remove()">remove</button>
+                <button class="btn btn-primary" ng-disabled="isAnySelected()" ng-click="remove()">Remove Selected</button>
                 <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
                     <thead>
                     <tr>
@@ -105,7 +94,7 @@
                     </thead>
                     <tfoot>
                     <td colspan=8>
-                        <div class="pagination pull-right text-center">
+                        <div class="pagination pull-left text-center">
 
                             <ul>
                                 <li ng-class="{disabled: currentPage == 0}">
@@ -125,7 +114,7 @@
                     </tfoot>
                     <tbody>
                     <tr ng-repeat="x in pagedItems[currentPage]">
-                        <td><input type="checkbox" ng-model="x.isDelete"/>{{$index}}</td>
+                        <td>{{$index+1}}.<input type="checkbox" ng-model="x.isDelete"/></td>
                         <td>{{ x.warehouse.name }}</td>
                         <td>{{ x.product.productName }}</td>
                         <td>{{ x.lastTouched | date:'dd-MMM-yy hh:mm a' }}</td>
