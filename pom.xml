@@ -5,7 +5,7 @@
 
     <groupId>vita.house</groupId>
     <artifactId>inventory</artifactId>
-    <version>0.1.14-PRODUCTION</version>
+    <version>0.1.15-PRODUCTION</version>
     <packaging>war</packaging>
 
     <name>inventory</name>
