@@ -12,8 +12,8 @@ import java.util.List;
 public interface InventoryRepo extends PagingAndSortingRepository<Inventory, Long> {
 
     @Query(value = "SELECT oi.id, oi.warehouse_id, oi.product_id, oi.comments, oi.received_stock, oi.issued_stock, " +
-            "oi.last_touched, (SELECT SUM(ii.received_stock) - SUM(ii.issued_stock) FROM Inventory ii " +
+            "oi.last_touched, (SELECT SUM(ii.received_stock) - SUM(ii.issued_stock) FROM inventory ii " +
             "where ii.product_id = oi.product_id and ii.warehouse_id=?1) " +
-            "AS inventory_available FROM Inventory oi where oi.warehouse_id = ?1 ORDER BY oi.ID DESC ", nativeQuery = true)
+            "AS inventory_available FROM inventory oi where oi.warehouse_id = ?1 ORDER BY oi.ID DESC ", nativeQuery = true)
     List<Inventory> findAllWithAvailableInventory(Long warehouseId);
 }
